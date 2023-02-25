@@ -16,6 +16,9 @@ mysql> select *from Students;
 | 12 | 101 | Digvijay | 8 | CE |
 +------+----------+----------+------+---------+
 12 rows in set (0.01 sec)
+
+
+
 mysql> select *from PlacementDrive;
 +----------+--------------+---------+----------+
 | Drive_id | Company_Name | Package | Location |
@@ -29,6 +32,8 @@ mysql> select *from PlacementDrive;
 | 107 | Apple | 300000 | Nagpur |
 +----------+--------------+---------+----------+
 7 rows in set (0.00 sec)
+
+
 mysql> select *from training;
 +------+--------------+-------+-------+
 | T_id | Tcompanyname | Tfee | Tyear |
@@ -43,6 +48,8 @@ mysql> select *from training;
 | 7 | Apple | 79350 | 2019 |
 +------+--------------+-------+-------+
 8 rows in set (0.00 sec)
+
+
 mysql> select * from Students Natural Join PlacementDrive;
 +----------+------+----------+------+---------+--------------+---------+----------+
 | Drive_id | s_id | sname | CGPA | sbranch | Company_Name | Package | Location |
@@ -62,6 +69,8 @@ mysql> select * from Students Natural Join PlacementDrive;
 | 101 | 12 | Digvijay | 8 | CE | Mercedes | 200000 | Delhi |
 +----------+------+----------+------+---------+--------------+---------+----------+
 12 rows in set (0.00 sec)
+
+
 mysql> select
 Students.s_id,Students.Drive_id,Students.sname,Students.CGPA,Students.sbranch,PlacementDrive.Company_Name
 from Students JOIN PlacementDrive ON Students.Drive_ID = PlacementDrive.Drive_ID;
@@ -82,6 +91,8 @@ from Students JOIN PlacementDrive ON Students.Drive_ID = PlacementDrive.Drive_ID
 | 12 | 101 | Digvijay | 8 | CE | Mercedes |
 +------+----------+----------+------+---------+--------------+
 12 rows in set (0.00 sec)
+
+
 mysql> select Students.sname,Students.sbranch from Students JOIN PlacementDrive ON Students.Drive_ID =
 PlacementDrive.Drive_ID WHERE Package>500000;
 +--------+---------+
@@ -91,6 +102,7 @@ PlacementDrive.Drive_ID WHERE Package>500000;
 | Soham | CE |
 +--------+---------+
 2 rows in set (0.00 sec)
+
 
 mysql> select Students.sname,training.Tcompanyname from Students JOIN training ON Students.s_id =
 training.T_id where Tfee > 20000;
@@ -105,9 +117,13 @@ training.T_id where Tfee > 20000;
 | Shreya | Apple |
 +---------+--------------+
 6 rows in set (0.00 sec)
+
+
 mysql> select training.T_id,training.Tcompanyname,training.Tfee,training.Tyear from Students JOIN training ON
 Students.s_id = training.T_id where sname = 'Shantanu' and Tyear = 2011;
 Empty set (0.00 sec)
+
+
 mysql> select COUNT(*) FROM training where Tyear < 2015;
 +----------+
 
@@ -116,6 +132,8 @@ mysql> select COUNT(*) FROM training where Tyear < 2015;
 | 0 |
 +----------+
 1 row in set (0.00 sec)
+
+
 mysql> select Students.sname from Students JOIN PlacementDrive ON Students.Drive_ID =
 PlacementDrive.Drive_ID where Company_Name='Google' AND
 Location = 'Delhi';
@@ -125,9 +143,13 @@ Location = 'Delhi';
 | Shreyal |
 +---------+
 1 row in set (0.00 sec)
+
+
 mysql> select Students.sname from Students JOIN PlacementDrive ON Students.Drive_ID =
 PlacementDrive.Drive_ID where Company_Name='Microsoft' AND Location = 'Thane';
 Empty set (0.00 sec)
+
+
 mysql> select Students.sname from Students JOIN training ON Students.s_id = training.T_id where
 Tcompanyname = 'Apple' AND Tyear = 2019;
 +--------+
@@ -136,9 +158,13 @@ Tcompanyname = 'Apple' AND Tyear = 2019;
 | Shreya |
 +--------+
 1 row in set (0.00 sec)
+
+
 mysql> select Students.sname from Students JOIN training ON Students.s_id = training.T_id where
 Tcompanyname = 'Microsoft' AND Tyear = 2015;
 Empty set (0.00 sec)
+
+
 mysql> CREATE VIEW yourviews AS (Select * from Students join training ON Students.s_id = training.T_id);
 Query OK, 0 rows affected (0.03 sec)
 mysql> select * FROM yourviews;
